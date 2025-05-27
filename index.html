@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anion Gap Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      padding: 5px;
+      margin: 5px 0;
+      width: 100px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 7px 15px;
+    }
+    .result, .explanation, .quiz, .relevance {
+      margin-top: 20px;
+      padding: 10px;
+      border-left: 4px solid #007BFF;
+      background: #f9f9f9;
+    }
+    .quiz {
+      border-color: green;
+      background: #e6ffe6;
+    }
+    .relevance {
+      border-color: darkorange;
+      background: #fff3e6;
+    }
+  </style>
+</head>
+<body>
+  <h1>Anion Gap Calculator</h1>
+  <p>Use this tool to calculate the Anion Gap (AG) and determine if it is elevated. Optionally include albumin to calculate the corrected AG.</p>
+
+  <label for="na">Sodium (Na⁺):</label>
+  <input type="number" id="na" step="0.1">
+
+  <label for="cl">Chloride (Cl⁻):</label>
+  <input type="number" id="cl" step="0.1">
+
+  <label for="hco3">Bicarbonate (HCO₃⁻):</label>
+  <input type="number" id="hco3" step="0.1">
+
+  <label for="albumin">Albumin (g/dL) [optional]:</label>
+  <input type="number" id="albumin" step="0.1">
+
+  <div style="margin-top: 20px;"><button onclick="calculateAG()">Calculate Anion Gap</button></div>
+
+  <div class="result" id="result"></div>
+  <div class="explanation" id="explanation"></div>
+  <div class="quiz" id="quiz"></div>
+  <div class="relevance" id="relevance"></div>
+
+  <script>
+    function calculateAG() {
+      const na = parseFloat(document.getElementById('na').value);
+      const cl = parseFloat(document.getElementById('cl').value);
+      const hco3 = parseFloat(document.getElementById('hco3').value);
+      const albumin = parseFloat(document.getElementById('albumin').value);
+
+      if (isNaN(na) || isNaN(cl) || isNaN(hco3)) {
+        document.getElementById('result').textContent = 'Please enter valid values for Na⁺, Cl⁻, and HCO₃⁻.';
+        return;
+      }
+
+      const ag = na - (cl + hco3);
+      let result = `Anion Gap (AG) = ${ag.toFixed(2)} mmol/L`;
+      let interpretation = (ag > 12) ? 'Elevated Anion Gap' : 'Normal Anion Gap';
+      let explanation = `AG = Na⁺ - (Cl⁻ + HCO₃⁻)<br>${na} - (${cl} + ${hco3}) = ${ag.toFixed(2)}`;
+
+      if (!isNaN(albumin)) {
+        const correctedAG = ag + 2.5 * (4.0 - albumin);
+        result += `<br>Corrected AG (for albumin): ${correctedAG.toFixed(2)} mmol/L`;
+        interpretation = (correctedAG > 12) ? 'Elevated Corrected Anion Gap' : 'Normal Corrected Anion Gap';
+        explanation += `<br>Corrected AG = AG + 2.5 × (4.0 - albumin)`;
+        explanation += `<br>${ag.toFixed(2)} + 2.5 × (4.0 - ${albumin}) = ${correctedAG.toFixed(2)}`;
+      }
+
+      document.getElementById('result').innerHTML = `<strong>${result}</strong><br>${interpretation}`;
+      document.getElementById('explanation').innerHTML = `<strong>Explanation:</strong><br>${explanation}`;
+      document.getElementById('quiz').innerHTML = `<strong>Quiz:</strong> What are possible causes of an elevated anion gap?`;
+      document.getElementById('relevance').innerHTML = `<strong>Clinical Relevance:</strong><br>An elevated AG can indicate metabolic acidosis due to causes such as lactic acidosis, ketoacidosis, or renal failure.`;
+    }
+  </script>
+<footer style="text-align:center; margin-top:40px; font-size:0.9em; color:#555;">
+  &copy; Claire L. Price
+</footer>
+</body>
+</html>
