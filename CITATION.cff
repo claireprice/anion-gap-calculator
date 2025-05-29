@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this tool, please cite it using the information below."
+title: "Anion Gap Calculator"
+authors:
+  - family-names: Price
+    given-names: Claire Louise
+    affiliation: Swansea University Medical School, Swansea SA2 8PP UK
+    orcid: "https://orcid.org/0000-0002-6045-4835" 
+    website: "https://claireprice.github.io/acid-base-tools-homepage/"
+date-released: 2025-01-01
+version: "1.0"
+license: "CC-BY-NC-4.0"
+url: "https://claireprice.github.io/anion-gap-calculator/"  
+repository-code: "https://github.com/claireprice/anion-gap-calculator" 
+keywords:
+  - anion gap
+  - acid-base balance
+  - medical education
+  - clinical calculator
+  - metabolic acidosis
+  - electrolyte panel
+abstract: >
+  The Anion Gap Calculator is a browser-based educational tool designed to evaluate metabolic acidosis
+  using standard serum electrolytes. It calculates the anion gap and corrected anion gap (if albumin is provided),
+  offering instant interpretation, clinical relevance, and interactive learning elements. Intended for healthcare
+  students, educators, and clinicians in training. For educational use only.
